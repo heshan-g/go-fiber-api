@@ -3,3 +3,6 @@ build:
 
 run: build
 	./bin/server
+
+dev:
+	nodemon -e go --signal SIGTERM --exec 'make' run
