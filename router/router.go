@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/heshan-g/go-api/internal/handler"
+	"github.com/heshan-g/go-api/handler"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
