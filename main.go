@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/heshan-g/go-api/database"
+	"github.com/heshan-g/go-api/config"
 	"github.com/heshan-g/go-api/router"
 	"github.com/joho/godotenv"
 )
@@ -22,7 +22,7 @@ func main() {
 		return c.SendString("Server is healthy")
 	})
 
-	database.Connect()
+	config.ConnectToDB()
 
 	router.SetupRoutes(app)
 

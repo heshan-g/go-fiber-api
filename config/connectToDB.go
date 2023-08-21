@@ -1,4 +1,4 @@
-package database
+package config
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 var DB *gorm.DB
 var dbErr error
 
-func Connect() {
+func ConnectToDB() {
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		os.Getenv("PG_HOST"),

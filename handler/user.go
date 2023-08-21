@@ -2,7 +2,7 @@ package handler
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/heshan-g/go-api/database"
+	"github.com/heshan-g/go-api/config"
 	"github.com/heshan-g/go-api/model"
 )
 
@@ -23,7 +23,7 @@ func CreateUser(c *fiber.Ctx) error {
 		return err
 	}
 
-	result := database.DB.Create(&user)
+	result := config.DB.Create(&user)
 	if result.Error != nil {
 		return result.Error
 	}
