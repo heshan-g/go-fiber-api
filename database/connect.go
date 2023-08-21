@@ -9,6 +9,9 @@ import (
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+var dbErr error
+
 func Connect() {
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
@@ -20,12 +23,10 @@ func Connect() {
 		os.Getenv("PG_SSLMODE"),
 	)
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
+	DB, dbErr = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if dbErr != nil {
 		panic("Error connecting to database")
 	}
 
-	fmt.Println("Database connection successful")
-
-	db.AutoMigrate(&model.User{})
+	DB.AutoMigrate(&model.User{})
 }
