@@ -7,9 +7,20 @@ import (
 )
 
 func GetUsers(c *fiber.Ctx) error {
-	var users []model.User
+	type GetUser struct {
+		ID        int    `json:"id"`
+		Name      string `json:"name"`
+		Email     string `json:"email"`
+		CreatedAt string `json:"createdAt"`
+		UpdatedAt string `json:"updatedAt"`
+		DeletedAt string `json:"deletedAt"`
+	}
 
-	result := config.DB.Find(&users)
+	var users []GetUser
+
+	q := "SELECT id, name, email, created_at, updated_at, deleted_at FROM users"
+
+	result := config.DB.Raw(q).Scan(&users)
 	if result.Error != nil {
 		return result.Error
 	}
@@ -29,5 +40,5 @@ func CreateUser(c *fiber.Ctx) error {
 		return result.Error
 	}
 
-	return c.Status(201).JSON(fiber.Map{ "id": user.ID })
+	return c.Status(201).JSON(fiber.Map{"id": user.ID})
 }
