@@ -7,13 +7,14 @@ import (
 )
 
 func GetUsers(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"status": "success",
-		"message": "All users",
-		"data": fiber.Map{
-			"userId": "hard-coded-user-id",
-		},
-	})
+	var users []model.User
+
+	result := config.DB.Find(&users)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return c.JSON(users)
 }
 
 func CreateUser(c *fiber.Ctx) error {
